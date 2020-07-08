@@ -1,4 +1,4 @@
-const SnoCord = require('SnoCord');
+const SnoCord = require('snocord');
 const config = require("./config.json");
 const ytdl = require('ytdl-core');
 const googleTTS = require('google-tts-api');
