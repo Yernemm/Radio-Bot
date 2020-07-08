@@ -150,7 +150,7 @@ bot.client.on('ready', async () => {
 
       // Only try to join the sender's voice channel if they are in one themselves
 
-        bot.client.channels.fetch('255003142595411969')
+        bot.client.channels.fetch('730241232722329621')
         .then(async ch => {
            const connection = await ch.join();
            /*
@@ -175,7 +175,7 @@ bot.client.on('ready', async () => {
                 
             })
             */
-           bot.client.channels.fetch('730231922327814154').then(ach=>{
+           bot.client.channels.fetch('730241301806579812').then(ach=>{
                announceChannel = ach;
                recursivelyPlay(connection);
            })
