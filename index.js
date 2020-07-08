@@ -22,6 +22,45 @@ stream._transform = function (chunk,encoding,done)
     done()
 }
 
+const musics = [
+
+];
+
+function addmusic(name, link){
+    musics.push({
+        name: name,
+        link: link
+    });
+}
+
+const introAnnouncements = ["Robot Radio. Moving on to", "Robot Radio. Now playing", "Up next,", "You are listening to Robot Radio."];
+
+addmusic("Tame Impala - New Person, Same Old Mistakes", "https://www.youtube.com/watch?v=tEXYfT_G0W0");
+addmusic("Run The Jewels - a few words for the firing squad", "https://www.youtube.com/watch?v=5dgH1mlXDhA");
+addmusic("Childish Gambino - 3005","https://www.youtube.com/watch?v=tG35R8F2j8k");
+
+function * nextStream(){
+    while(true){
+        let nextUp = randomArr(musics);
+
+        let stream =  streamArray([randomArr(introAnnouncements) + " " + nextUp.name])
+        .pipe(makeProp("message"))
+        .pipe(speechStream({
+            amplitude: 100,
+            pitch: 60,
+            speed: 160,
+            wordgap: 0.8
+        }))
+
+        yield stream;
+
+        yield ytdl(nextUp.link, { filter: 'audioonly' });
+    }
+}
+
+function randomArr(array) {
+    return array[Math.floor(Math.random() * array.length)];
+ }
 
 
 bot.client.on('ready', async () => {
