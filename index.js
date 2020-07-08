@@ -2,9 +2,6 @@ const SnoCord = require('SnoCord');
 const config = require("./config.json");
 const ytdl = require('ytdl-core');
 const googleTTS = require('google-tts-api');
-var speechStream = require("speech-stream");
-var streamArray = require("stream-array");
-var makeProp = require("make-prop-stream");
 
 let bot = new SnoCord.Bot();
 bot.setConfig(config);
@@ -36,7 +33,33 @@ function addmusic(name, link){
 
 let announceChannel;
 
-const introAnnouncements = ["Robot Radio. Moving on to", "Robot Radio. Now playing", "Up next,", "You are listening to Robot Radio.", "Playing next", "Robot Radio. Up next,", "Moving on to"];
+const introAnnouncements = [
+    "Robot Radio. Moving on to", 
+    "Robot Radio. Now playing,", 
+    "Up next,",
+    "You are listening to Robot Radio.", 
+    "Playing next,", 
+    "Robot Radio. Up next,", 
+    "Moving on to",
+    "This is Robot Radio. Playing,", 
+    "The Radio on Discord. Up next,", 
+    "Variety Channel. Robot Radio.", 
+    "The one Discord Radio. Moving on to",,
+    "The one Discord Radio. Now playing,",
+    "This is your host, Null Body. Playing",
+    "The bones do work, and they play",
+    "Wub wub wub robot radioo.",
+    "What up fam, let's listen to",
+    "Next song, picked by yours truly, Null Body.",
+    "Hey hey hey hey. It's time for",
+    "It is -CURRENT TIME-, that's right:",
+    "Hey, you hearin this? That's right, it's",
+    "The only music I want to hear now is",
+    "Oh this one's my favourite:",
+    "Love this next track:",
+    "You have got to hear this next one:",
+    "More music, just ahead."
+];
 
 addmusic("Tame Impala - New Person, Same Old Mistakes", "https://www.youtube.com/watch?v=tEXYfT_G0W0");
 addmusic("Run The Jewels - a few words for the firing squad", "https://www.youtube.com/watch?v=5dgH1mlXDhA");
@@ -55,6 +78,18 @@ addmusic("Tame Impala - Posthumous Forgiveness", "https://www.youtube.com/watch?
 addmusic("Tame Impala - Borderline", "https://www.youtube.com/watch?v=2g5xkLqIElU")
 addmusic("J Cole - Photograph", "https://www.youtube.com/watch?v=tIRi44nVNCA")
 addmusic("J Cole - 19 85", "https://www.youtube.com/watch?v=ii6u1wSAu90")
+addmusic("Cannonhead - This Place Is Built", "https://www.youtube.com/watch?v=FwzvIZFjm7g")
+addmusic("Caravan Palace - Melancolia", "https://www.youtube.com/watch?v=qI7RI3Om_dY")
+addmusic("Smash Mouth - All Star", "https://www.youtube.com/watch?v=5ZYgIrqELFw")
+addmusic("Caravan Palace - Wonderland", "https://www.youtube.com/watch?v=vCXsRoyFRQE")
+addmusic("Aviators - Requiem for the King", "https://www.youtube.com/watch?v=ymWI4magKio")
+addmusic("Aviators - Traveler's Song", "https://www.youtube.com/watch?v=EZno7ZAR-fM")
+addmusic("Childish Gambino - Feels Like Summer", "https://www.youtube.com/watch?v=F1B9Fk_SgI0")
+addmusic("Gorillaz - Feel Good Inc.", "https://www.youtube.com/watch?v=dKez38i5h14")
+addmusic("Sabaton - Primo Victoria", "https://www.youtube.com/watch?v=5DrkjRJLzKg")
+addmusic("Metallica - One", "https://www.youtube.com/watch?v=aSNJ00iAZ7I")
+addmusic("System Of A Down - B Y O B", "https://www.youtube.com/watch?v=zUzd9KyIDrM")
+addmusic("System Of A Down - Chop Suey!", "https://www.youtube.com/watch?v=CSvFpBOe8eY")
 
 async function* nextStreamGenerator(){
         let nextUp;
@@ -73,7 +108,7 @@ async function* nextStreamGenerator(){
         }))
        */
         let speechLink = await googleTTS(nextText + " " + nextUp.name, 'en', 1)
-        announceChannel.send(nextText + "\n" + nextUp.link)
+        announceChannel.send(nextText + " " + nextUp.name + "\n" + nextUp.link)
 
         //yield "https://translate.google.com/translate_tts?ie=UTF-8&q=Hello%20World&tl=en&total=1&idx=0&textlen=11&tk=88715.498498&client=t&prev=input&ttsspeed=1";
         //yield stream;
